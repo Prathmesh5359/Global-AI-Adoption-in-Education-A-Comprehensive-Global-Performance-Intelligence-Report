@@ -3,322 +3,892 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Global AI Adoption in Education</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-
-        body{
-            font-family: Arial, sans-serif;
-            background:#f4f8fc;
+        :root {
+            --navy: #081525;
+            --navy-light: #102a43;
+            --blue: #2563eb;
+            --blue-light: #60a5fa;
+            --cyan: #22d3ee;
+            --white: #ffffff;
+            --text: #10233d;
+            --muted: #64748b;
+            --bg: #f5f8fc;
+            --border: #e5eaf1;
         }
 
-        /* Navbar */
-
-        .navbar{
-            background:#0d1b2a;
+        * {
+            box-sizing: border-box;
         }
 
-        .navbar-brand{
-            color:white;
-            font-weight:bold;
-            font-size:24px;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .navbar-brand:hover{
-            color:white;
+        body {
+            margin: 0;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
         }
 
-        .nav-link{
-            color:white !important;
-            margin-left:15px;
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            min-height: 72px;
+            background: rgba(8, 21, 37, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .nav-link:hover{
-            color:#00d4ff !important;
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: white !important;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
         }
 
-        /* Hero */
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            margin-right: 10px;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                var(--blue),
+                var(--cyan)
+            );
+            box-shadow: 0 8px 22px rgba(34, 211, 238, 0.2);
+        }
 
-        .hero{
+        .nav-link {
+            color: #cbd5e1 !important;
+            font-weight: 600;
+            padding: 9px 14px !important;
+            margin-left: 4px;
+            border-radius: 9px;
+            transition: 0.25s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: white !important;
+            background: rgba(255,255,255,0.09);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            position: relative;
+            min-height: 86vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
             background:
-            linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
-            url("/static/images/ai-bg.jpg");
+                linear-gradient(
+                    135deg,
+                    rgba(5, 18, 34, 0.88),
+                    rgba(15, 61, 112, 0.76)
+                ),
+                url("/static/images/ai-bg.jpg");
 
-            background-size:cover;
-            background-position:center;
-            height:90vh;
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            color:white;
-            text-align:center;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
         }
 
-        .hero h1{
-            font-size:55px;
-            font-weight:bold;
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            right: -180px;
+            top: -180px;
+            border-radius: 50%;
+            background: rgba(34, 211, 238, 0.12);
+            filter: blur(10px);
         }
 
-        .hero p{
-            font-size:20px;
-            margin-top:20px;
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            left: -220px;
+            bottom: -230px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.18);
         }
 
-        .hero .btn{
-            margin:10px;
-            padding:12px 30px;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 950px;
+            padding: 40px 20px;
         }
 
-        /* Section */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
 
-        .section-title{
-            text-align:center;
-            margin:70px 0 40px;
-            font-weight:bold;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,0.08);
+            color: #dbeafe;
+
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+
+            backdrop-filter: blur(8px);
         }
 
-        /* Cards */
+        .hero h1 {
+            margin-top: 22px;
+            margin-bottom: 20px;
 
-        .card{
-            border:none;
-            border-radius:15px;
-            box-shadow:0 8px 20px rgba(0,0,0,.10);
-            transition:.4s;
+            font-size: clamp(40px, 6vw, 70px);
+            line-height: 1.05;
+            font-weight: 850;
+            letter-spacing: -2px;
         }
 
-        .card:hover{
-            transform:translateY(-8px);
+        .hero h1 span {
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #93c5fd,
+                #67e8f9
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .stat{
-            font-size:38px;
-            color:#1f4b8f;
-            font-weight:bold;
+        .hero p {
+            max-width: 760px;
+            margin: 0 auto;
+
+            color: #dbeafe;
+            font-size: 18px;
+            line-height: 1.75;
         }
 
-        /* About */
+        /* =========================
+           HERO BUTTONS
+        ========================= */
 
-        .about{
-            background:white;
-            margin-top:70px;
-            padding:50px;
-            border-radius:15px;
-            box-shadow:0 8px 20px rgba(0,0,0,.10);
+        .hero-buttons {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        footer{
-            background:#0d1b2a;
-            color:white;
-            text-align:center;
-            padding:25px;
-            margin-top:70px;
+        .hero-btn {
+            min-width: 150px;
+            padding: 12px 22px;
+
+            border-radius: 11px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
         }
 
+        .hero-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-dashboard {
+            color: white;
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+            border: none;
+
+            box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+        }
+
+        .btn-dashboard:hover {
+            color: white;
+            box-shadow: 0 15px 30px rgba(37,99,235,0.4);
+        }
+
+        .btn-story {
+            color: white;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-story:hover {
+            color: white;
+            background: rgba(255,255,255,0.16);
+        }
+
+        /* =========================
+           INSIGHTS SECTION
+        ========================= */
+
+        .insights-section {
+            padding: 85px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            display: inline-block;
+            margin-bottom: 10px;
+
+            color: var(--blue);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: 38px;
+            font-weight: 850;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            margin: 12px auto 0;
+
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stat-card {
+            height: 100%;
+            padding: 28px;
+
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            box-shadow: 0 10px 30px rgba(15, 39, 66, 0.07);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-7px);
+            border-color: #cbd5e1;
+            box-shadow: 0 18px 40px rgba(15, 39, 66, 0.12);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 13px;
+            background: #eff6ff;
+
+            font-size: 22px;
+        }
+
+        .stat {
+            font-size: 40px;
+            line-height: 1;
+            font-weight: 850;
+            letter-spacing: -1px;
+
+            color: var(--blue);
+        }
+
+        .stat-card h5 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            margin: 0;
+
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        /* =========================
+           ABOUT SECTION
+        ========================= */
+
+        .about-section {
+            padding: 10px 0 85px;
+        }
+
+        .about-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 50px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f8fbff
+                );
+
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            box-shadow: 0 15px 45px rgba(15, 39, 66, 0.08);
+        }
+
+        .about-card::after {
+            content: "";
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            right: -110px;
+            top: -110px;
+
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.06);
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-card h2 {
+            margin-bottom: 18px;
+
+            font-size: 32px;
+            font-weight: 850;
+        }
+
+        .about-card p {
+            max-width: 850px;
+
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .about-buttons {
+            margin-top: 28px;
+
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .about-btn {
+            padding: 10px 18px;
+
+            border-radius: 10px;
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .about-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 40px 20px;
+
+            background: var(--navy);
+            color: #94a3b8;
+
+            text-align: center;
+        }
+
+        footer h4 {
+            margin-bottom: 8px;
+
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                min-height: 64px;
+            }
+
+            .navbar-brand {
+                font-size: 17px;
+            }
+
+            .brand-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .nav-link {
+                font-size: 13px;
+                padding: 8px 8px !important;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-heading h2 {
+                font-size: 31px;
+            }
+
+            .about-card {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .navbar .container {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .navbar-nav {
+                margin-left: 0 !important;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                min-height: 78vh;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-btn {
+                width: 100%;
+            }
+
+            .insights-section {
+                padding: 65px 0;
+            }
+
+            .stat-card {
+                padding: 24px;
+            }
+
+            .about-card h2 {
+                font-size: 27px;
+            }
+
+            .about-buttons {
+                flex-direction: column;
+            }
+
+            .about-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
-
 </head>
 
 <body>
 
-<!-- Navbar -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar navbar-expand-lg">
+    <div class="container">
 
-<div class="container">
+        <a class="navbar-brand" href="/">
+            <span class="brand-icon">🌍</span>
+            Global AI Students
+        </a>
 
-<a class="navbar-brand" href="/">
-🌍 Global AI Students
-</a>
+        <div class="navbar-nav ms-auto">
 
-<div class="navbar-nav ms-auto">
+            <a class="nav-link active" href="/">
+                Home
+            </a>
 
-<a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/dashboard1">
+                Dashboard 1
+            </a>
 
-<a class="nav-link" href="/dashboard1">
-Dashboard 1
-</a>
+            <a class="nav-link" href="/dashboard2">
+                Dashboard 2
+            </a>
 
-<a class="nav-link" href="/dashboard2">
-Dashboard 2
-</a>
+            <a class="nav-link" href="/story">
+                Story
+            </a>
 
-<a class="nav-link" href="/story">
-Story
-</a>
-
-</div>
-
-</div>
-
+        </div>
+    </div>
 </nav>
 
-<!-- Hero -->
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<div>
+    <div class="hero-content">
 
-<h1>
-Global AI Adoption in Education
-</h1>
+        <div class="hero-badge">
+            ✦ Interactive Data Story
+        </div>
 
-<p>
-Evaluating the Adoption, Usage, and Growth of Artificial Intelligence
-in Education Worldwide.
-</p>
+        <h1>
+            Global AI Adoption
+            <br>
+            <span>in Education</span>
+        </h1>
 
-<a href="/dashboard1" class="btn btn-primary btn-lg">
-Dashboard 1
-</a>
+        <p>
+            Evaluating the adoption, usage, and growth of
+            Artificial Intelligence in education worldwide.
+        </p>
 
-<a href="/dashboard2" class="btn btn-success btn-lg">
-Dashboard 2
-</a>
+        <div class="hero-buttons">
 
-<a href="/story" class="btn btn-warning btn-lg">
-Story
-</a>
+            <a
+                href="/dashboard1"
+                class="btn hero-btn btn-dashboard"
+            >
+                📊 Dashboard 1
+            </a>
 
-</div>
+            <a
+                href="/dashboard2"
+                class="btn hero-btn btn-dashboard"
+            >
+                📈 Dashboard 2
+            </a>
+
+            <a
+                href="/story"
+                class="btn hero-btn btn-story"
+            >
+                📖 Explore Story
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- Insights -->
 
-<div class="container">
+<!-- =========================
+     INSIGHTS
+========================= -->
 
-<h2 class="section-title">
-Top Insights
-</h2>
+<section class="insights-section">
 
-<div class="row g-4">
+    <div class="container">
 
-<div class="col-md-3">
+        <div class="section-heading">
 
-<div class="card p-4 text-center">
+            <span class="section-label">
+                Key Findings
+            </span>
 
-<div class="stat">85+</div>
+            <h2>
+                Top Insights
+            </h2>
 
-<h5>Countries Surveyed</h5>
+            <p>
+                A quick overview of the key findings from the
+                Global AI Adoption in Education analysis.
+            </p>
 
-<p>
-Data collected from students across the world.
-</p>
+        </div>
 
-</div>
 
-</div>
+        <div class="row g-4">
 
-<div class="col-md-3">
+            <!-- Card 1 -->
 
-<div class="card p-4 text-center">
+            <div class="col-md-6 col-lg-3">
 
-<div class="stat">67%</div>
+                <div class="stat-card">
 
-<h5>AI Usage Growth</h5>
+                    <div class="stat-icon">
+                        🌎
+                    </div>
 
-<p>
-Increase in AI adoption among students.
-</p>
+                    <div class="stat">
+                        85+
+                    </div>
 
-</div>
+                    <h5>
+                        Countries Surveyed
+                    </h5>
 
-</div>
+                    <p>
+                        Data collected from students
+                        across the world.
+                    </p>
 
-<div class="col-md-3">
+                </div>
 
-<div class="card p-4 text-center">
+            </div>
 
-<div class="stat">#1</div>
 
-<h5>Top AI Tool</h5>
+            <!-- Card 2 -->
 
-<p>
-ChatGPT is the most widely used AI assistant.
-</p>
+            <div class="col-md-6 col-lg-3">
 
-</div>
+                <div class="stat-card">
 
-</div>
+                    <div class="stat-icon">
+                        📈
+                    </div>
 
-<div class="col-md-3">
+                    <div class="stat">
+                        67%
+                    </div>
 
-<div class="card p-4 text-center">
+                    <h5>
+                        AI Usage Growth
+                    </h5>
 
-<div class="stat">48%</div>
+                    <p>
+                        Increase in AI adoption
+                        among students.
+                    </p>
 
-<h5>Institutional Support</h5>
+                </div>
 
-<p>
-Universities actively support AI integration.
-</p>
+            </div>
 
-</div>
 
-</div>
+            <!-- Card 3 -->
 
-</div>
+            <div class="col-md-6 col-lg-3">
 
-<!-- About -->
+                <div class="stat-card">
 
-<div class="about">
+                    <div class="stat-icon">
+                        🤖
+                    </div>
 
-<h2>
-About This Project
-</h2>
+                    <div class="stat">
+                        #1
+                    </div>
 
-<p class="mt-3">
+                    <h5>
+                        Top AI Tool
+                    </h5>
 
-This project analyzes Artificial Intelligence adoption in education
-using Tableau dashboards integrated with Flask.
+                    <p>
+                        ChatGPT is the most widely
+                        used AI assistant.
+                    </p>
 
-It provides interactive visualizations of AI usage, institutional
-support, regional trends, and educational insights collected from
-multiple countries.
+                </div>
 
-</p>
+            </div>
 
-<div class="mt-4">
 
-<a href="/dashboard1" class="btn btn-primary">
-View Dashboard 1
-</a>
+            <!-- Card 4 -->
 
-<a href="/dashboard2" class="btn btn-success">
-View Dashboard 2
-</a>
+            <div class="col-md-6 col-lg-3">
 
-<a href="/story" class="btn btn-warning">
-View Story
-</a>
+                <div class="stat-card">
 
-</div>
+                    <div class="stat-icon">
+                        🎓
+                    </div>
 
-</div>
+                    <div class="stat">
+                        48%
+                    </div>
 
-</div>
+                    <h5>
+                        Institutional Support
+                    </h5>
 
-<!-- Footer -->
+                    <p>
+                        Universities actively support
+                        AI integration.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="about-section">
+
+    <div class="container">
+
+        <div class="about-card">
+
+            <div class="about-content">
+
+                <span class="section-label">
+                    About the Project
+                </span>
+
+                <h2>
+                    Understanding AI in Education
+                </h2>
+
+                <p>
+                    This project analyzes Artificial Intelligence
+                    adoption in education using Tableau dashboards
+                    integrated with Flask.
+                </p>
+
+                <p>
+                    It provides interactive visualizations of AI
+                    usage, institutional support, regional trends,
+                    and educational insights collected from
+                    multiple countries.
+                </p>
+
+
+                <div class="about-buttons">
+
+                    <a
+                        href="/dashboard1"
+                        class="btn btn-primary about-btn"
+                    >
+                        View Dashboard 1
+                    </a>
+
+                    <a
+                        href="/dashboard2"
+                        class="btn btn-success about-btn"
+                    >
+                        View Dashboard 2
+                    </a>
+
+                    <a
+                        href="/story"
+                        class="btn btn-warning about-btn"
+                    >
+                        View Story
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-<h4>
-Global AI Adoption in Education
-</h4>
+    <h4>
+        Global AI Adoption in Education
+    </h4>
 
-<p>
-Built with Flask • Tableau • Python • Bootstrap
-</p>
+    <p>
+        Built with Flask • Tableau • Python • Bootstrap
+    </p>
 
-<p>
-© 2026 All Rights Reserved
-</p>
+    <p>
+        © 2026 All Rights Reserved
+    </p>
 
 </footer>
+
 
 </body>
 </html>
